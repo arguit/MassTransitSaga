@@ -1,0 +1,15 @@
+D:\Repos\GitHub\MassTransitSaga\Components\bin\Debug\net5.0\Components.deps.json
+D:\Repos\GitHub\MassTransitSaga\Components\bin\Debug\net5.0\Components.dll
+D:\Repos\GitHub\MassTransitSaga\Components\bin\Debug\net5.0\ref\Components.dll
+D:\Repos\GitHub\MassTransitSaga\Components\bin\Debug\net5.0\Components.pdb
+D:\Repos\GitHub\MassTransitSaga\Components\bin\Debug\net5.0\Contracts.dll
+D:\Repos\GitHub\MassTransitSaga\Components\bin\Debug\net5.0\Contracts.pdb
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.csprojAssemblyReference.cache
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.AssemblyInfoInputs.cache
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.AssemblyInfo.cs
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.csproj.CoreCompileInputs.cache
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.csproj.CopyComplete
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.dll
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\ref\Components.dll
+D:\Repos\GitHub\MassTransitSaga\Components\obj\Debug\net5.0\Components.pdb

@@ -1,0 +1,11 @@
+D:\Repos\GitHub\MassTransitSaga\Contracts\bin\Debug\net5.0\Contracts.deps.json
+D:\Repos\GitHub\MassTransitSaga\Contracts\bin\Debug\net5.0\Contracts.dll
+D:\Repos\GitHub\MassTransitSaga\Contracts\bin\Debug\net5.0\ref\Contracts.dll
+D:\Repos\GitHub\MassTransitSaga\Contracts\bin\Debug\net5.0\Contracts.pdb
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\Contracts.AssemblyInfoInputs.cache
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\Contracts.AssemblyInfo.cs
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\Contracts.csproj.CoreCompileInputs.cache
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\Contracts.dll
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\ref\Contracts.dll
+D:\Repos\GitHub\MassTransitSaga\Contracts\obj\Debug\net5.0\Contracts.pdb
