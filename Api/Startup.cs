@@ -21,13 +21,18 @@ namespace Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMediator(configure =>
-            {
-                configure.AddConsumer<SubmitOrderConsumer>();
-
+        {       
+            services.AddMassTransit(configure => 
+            {                
+                configure.UsingRabbitMq((busRegistrationContext, rabbitMqBusFactoryConfigurator) =>
+                {
+                    rabbitMqBusFactoryConfigurator.ConfigureEndpoints(busRegistrationContext);
+                });                
+                
                 configure.AddRequestClient<SubmitOrder>();
             });
+
+            services.AddMassTransitHostedService();
 
             services.AddControllers();
 

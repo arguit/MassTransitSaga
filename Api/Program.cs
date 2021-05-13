@@ -18,9 +18,9 @@ namespace Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureWebHostDefaults(configure =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    configure.UseStartup<Startup>();
                 });
     }
 }
