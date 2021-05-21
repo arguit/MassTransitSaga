@@ -1,37 +1,40 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Components.Consumers;
+using Components.StateMachines;
 
 namespace Service
 {
     class Program
     {
-        static void Main(string[] args) => 
+        static void Main(string[] args) =>
             CreateHostBuilder(args).Build().Run();
 
-        static IHostBuilder CreateHostBuilder(string[] args) => 
+        static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((context, services) =>
+                .ConfigureServices((hostBuilderContext, services) =>
                 {
-                    services.AddMassTransit(configure => 
+                    services.AddMassTransit(masstransit =>
                     {
-                        configure.AddConsumer<SubmitOrderConsumer>();
+                        masstransit.AddConsumer<SubmitOrderConsumer>();
 
-                        configure.UsingRabbitMq((busRegistrationContext, rabbitMqBusFactoryConfigurator) =>
+                        masstransit.AddSagaStateMachine<OrderStateMachine, OrderState>()
+                            .RedisRepository(redis =>
+                            {
+                                const string configurationString = "127.0.0.1:5002";
+
+                                redis.DatabaseConfiguration(configurationString);
+                            });
+
+                        masstransit.UsingRabbitMq((context, rabbitmq) =>
                         {
-                            rabbitMqBusFactoryConfigurator.ConfigureEndpoints(busRegistrationContext);
+                            rabbitmq.ConfigureEndpoints(context);
                         });
                     });
 
                     services.AddMassTransitHostedService();
-                    
+
                     services.AddHostedService<Worker>();
                 });
 

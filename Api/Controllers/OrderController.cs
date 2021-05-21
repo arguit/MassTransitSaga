@@ -9,16 +9,41 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrderController 
+    public class OrderController
         : ControllerBase
     {
         private readonly ILogger<OrderController> logger;
         private readonly IRequestClient<SubmitOrder> submitOrderRequestClient;
+        private readonly IRequestClient<CheckOrder> checkOrderClient;
 
-        public OrderController(ILogger<OrderController> logger, IRequestClient<SubmitOrder> submitOrderRequestClient)
+        public OrderController(
+            ILogger<OrderController> logger,
+            IRequestClient<SubmitOrder> submitOrderRequestClient,
+            IRequestClient<CheckOrder> checkOrderClient)
         {
             this.logger = logger;
             this.submitOrderRequestClient = submitOrderRequestClient;
+            this.checkOrderClient = checkOrderClient;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var (status, notFound) = await checkOrderClient.GetResponse<OrderStatus, OrderNotFound>(new()
+            {
+                OrderId = id
+            });
+
+            if (status.IsCompletedSuccessfully)
+            {
+                var response = await status;
+                return Ok(response.Message);
+            }
+            else
+            {
+                var response = await notFound;
+                return NotFound(response.Message);
+            }
         }
 
         [HttpPost]
@@ -34,13 +59,11 @@ namespace Api.Controllers
             if (accepted.IsCompletedSuccessfully)
             {
                 var response = await accepted;
-                
                 return Accepted(response.Message);
             }
             else
             {
                 var response = await rejected;
-
                 return BadRequest(response.Message);
             }
 
