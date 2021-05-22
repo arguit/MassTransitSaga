@@ -13,21 +13,25 @@ namespace Api.Controllers
         : ControllerBase
     {
         private readonly ILogger<OrderController> logger;
-        private readonly IRequestClient<SubmitOrder> submitOrderRequestClient;
+
+        private readonly IRequestClient<SubmitOrder> submitOrderClient;
         private readonly IRequestClient<CheckOrder> checkOrderClient;
+        private readonly IRequestClient<CloseOrder> closeOrderClient;
 
         public OrderController(
             ILogger<OrderController> logger,
-            IRequestClient<SubmitOrder> submitOrderRequestClient,
-            IRequestClient<CheckOrder> checkOrderClient)
+            IRequestClient<SubmitOrder> submitOrderClient,
+            IRequestClient<CheckOrder> checkOrderClient,
+            IRequestClient<CloseOrder> closeOrderClient)
         {
             this.logger = logger;
-            this.submitOrderRequestClient = submitOrderRequestClient;
+            this.submitOrderClient = submitOrderClient;
             this.checkOrderClient = checkOrderClient;
+            this.closeOrderClient = closeOrderClient;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("~/CheckOrder")]
+        public async Task<IActionResult> CheckOrder(Guid id)
         {
             var (status, notFound) = await checkOrderClient.GetResponse<OrderStatus, OrderNotFound>(new()
             {
@@ -46,10 +50,10 @@ namespace Api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(Guid id, string customerNumber)
+        [HttpPost("~/SubmitOrder")]
+        public async Task<IActionResult> SubmitOrder(Guid id, string customerNumber)
         {
-            var (accepted, rejected) = await this.submitOrderRequestClient.GetResponse<OrderSubmissionAccepted, OrderSubmissionRejected>(new()
+            var (accepted, rejected) = await this.submitOrderClient.GetResponse<OrderSubmissionAccepted, OrderSubmissionRejected>(new()
             {
                 OrderId = id,
                 Timestamp = InVar.Timestamp,
@@ -67,6 +71,27 @@ namespace Api.Controllers
                 return BadRequest(response.Message);
             }
 
+        }
+
+        [HttpPost("~/CloseOrder")]
+        public async Task<IActionResult> CloseOrder(Guid id)
+        {
+            var (closed, notFound) = await this.closeOrderClient.GetResponse<OrderCloseAccepted, OrderNotFound>(new()
+            {
+                OrderId = id,
+                Timestamp = InVar.Timestamp
+            });
+
+            if (closed.IsCompletedSuccessfully)
+            {
+                var response = await closed;
+                return Accepted(response.Message);
+            }
+            else
+            {
+                var response = await notFound;
+                return BadRequest(response.Message);
+            }
         }
     }
 }

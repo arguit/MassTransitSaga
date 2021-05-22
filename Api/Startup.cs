@@ -31,6 +31,7 @@ namespace Api
                 
                 masstransit.AddRequestClient<SubmitOrder>();
                 masstransit.AddRequestClient<CheckOrder>();
+                masstransit.AddRequestClient<CloseOrder>();
             });
 
             services.AddMassTransitHostedService();
