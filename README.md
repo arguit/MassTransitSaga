@@ -30,10 +30,10 @@ docker run --name Reids -p 5002:6379 -d redis
 
 > Within docker shell
 
-[redis commands](https://redis.io/commands)
+[Redis commands](https://redis.io/commands)
 
 ```shell
 redis-cli     # run redis cli
 scan 0        # get all stored keys
-hgetall key   # get all field for the given key
+hgetall key   # get all fields for the given key
 ```
