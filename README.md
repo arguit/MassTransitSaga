@@ -7,9 +7,9 @@
 ## Docker prerequisities
 
 ```powershell
-docker run --name Reids -p 5002:6379 -d redis
+docker run --name RabbitMQ -p 15672:15672 -p 5672:5672 masstransit/rabbitmq
 ```
 
 ```powershell
-docker run --name RabbitMQ -p 15672:15672 -p 5672:5672 masstransit/rabbitmq
+docker run --name Reids -p 5002:6379 -d redis
 ```
