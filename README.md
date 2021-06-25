@@ -40,5 +40,5 @@ docker exec -it <container id> sh     # run shell on the given docker
 ```shell
 redis-cli     # run redis cli
 scan 0        # get all stored keys
-hgetall key   # get all fields for the given key
+get <key>     # get all fields for the given key
 ```
