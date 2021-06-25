@@ -32,7 +32,7 @@ docker run --name Reids -p 5002:6379 -d redis
 
 [Redis commands](https://redis.io/commands)
 
-```
+```powershell
 docker ps                             # list all docker containers to obtain container id
 docker exec -it <container id> sh     # run shell on the given docker
 ```
